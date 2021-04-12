@@ -36,4 +36,4 @@ jobs:
 #         pytest
     - name: Run
       run: |
-        python ./main.py
+        python main.py
