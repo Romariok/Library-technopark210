@@ -1,0 +1,80 @@
+swagger: "2.0"
+info:
+  description: "This is a simple flask server"
+  version: "1.0.0"
+  title: "Flask server"
+  contact:
+    email: "apiteam@swagger.io"
+tags:
+- name: "html"
+  description: "Html routs"
+- name: "author"
+  description: "Author routs"
+schemes:
+- "http"
+paths:
+  /authors:
+    get:
+      tags:
+      - author
+      summary: "Get list of authors"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: '#/definitions/Authors'
+  /author:
+    post:
+      tags:
+      - author
+      summary: "Create author"
+      parameters:
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            required:
+              - name
+            properties:
+              name:
+                type: string
+                description: "Name of author"
+              comment:
+                type: string
+                description: "Some comment"
+      responses:
+          200:
+            description: "Author created"
+            schema:
+              $ref: '#/definitions/Author'
+  /author/{name}:
+    get:
+      tags:
+      - author
+      summary: "Get author by name"
+      parameters:
+      - in: "path"
+        name: "name"
+        type: string
+        required: True
+        description: "Name of author"
+      responses:
+        200:
+          description: "Author got"
+          schema:
+              $ref: '#/definitions/Author'
+definitions:
+  Author:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      comment:
+        type: "string"
+  Authors:
+    type: "array"
+    items:
+      name:
+        type: "string"
+      comment:
+        type: "string"
